@@ -16,3 +16,16 @@
     "multer": "^1.4.5-lts.1"
   }
 }
+{
+  "name": "sole-theory-server",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    // (whatever you already have) express, mongoose, cors, helmet,
+    // bcrypt, express-rate-limit, dotenv, multer, etc.
+  }
+}
