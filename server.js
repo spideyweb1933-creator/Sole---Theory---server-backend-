@@ -17,6 +17,8 @@ import productRoutes from './routes/products.js';
 import uploadRoutes from './routes/upload.js';
 
 const app = express();
+import cors from 'cors';
+
 
 // middleware
 app.use(helmet());
