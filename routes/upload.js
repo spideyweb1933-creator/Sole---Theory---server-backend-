@@ -26,3 +26,7 @@ router.post('/', auth('admin'), upload.single('image'), (req, res) => {
 
 export default router;
 
+- import multer from 'multer';
++ import multerNS from 'multer';
++ const multer = multerNS.default || multerNS;
+  
