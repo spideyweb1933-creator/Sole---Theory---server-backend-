@@ -8,5 +8,5 @@ const productSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
-export default mongoose.model('Product', productSchema);
-
+const Product = mongoose.model('Product', productSchema);
+export default Product;
