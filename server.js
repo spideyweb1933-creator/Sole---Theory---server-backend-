@@ -18,7 +18,27 @@ import productRoutes from './routes/products.js';
 import uploadRoutes from './routes/upload.js';
 
 const app = express();
+const allowedOrigins = [
+  'www.soletheory.fit',      // 
+  'sole-theory-admin-ui.vercel.app',   //
+  'https://soletheory.fit',                    // 
+  'https://www.soletheory.fit'                 // www.soletheory.fitt
+];
 
+app.use(cors({
+  origin: function (origin, callback) {
+    // allow mobile apps / curl / same-origin (no origin)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization']
+}));
+
+// (optional) make preflight replies fast
+app.options('*', cors());
 
 // middleware
 app.use(helmet());
