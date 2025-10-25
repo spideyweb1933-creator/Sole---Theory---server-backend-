@@ -4,20 +4,20 @@ import auth from '../middleware/auth.js';
 
 const router = express.Router();
 
-// Public: list products
+// public list
 router.get('/', async (_req, res) => {
   const items = await Product.find().sort({ createdAt: -1 });
   res.json(items);
 });
 
-// Admin: create product
+// create
 router.post('/', auth('admin'), async (req, res) => {
   const { name, price, imageUrl } = req.body;
   const p = await Product.create({ name, price, imageUrl });
   res.json(p);
 });
 
-// Admin: update product
+// update
 router.put('/:id', auth('admin'), async (req, res) => {
   const { name, price, imageUrl } = req.body;
   const p = await Product.findByIdAndUpdate(
@@ -28,11 +28,10 @@ router.put('/:id', auth('admin'), async (req, res) => {
   res.json(p);
 });
 
-// Admin: delete product
+// delete
 router.delete('/:id', auth('admin'), async (req, res) => {
   await Product.findByIdAndDelete(req.params.id);
   res.json({ ok: true });
 });
 
 export default router;
-
