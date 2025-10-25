@@ -19,10 +19,10 @@ import uploadRoutes from './routes/upload.js';
 
 const app = express();
 const allowedOrigins = [
-  'www.soletheory.fit',      // 
-  'sole-theory-admin-ui.vercel.app',   //
-  'https://soletheory.fit',                    // 
-  'https://www.soletheory.fit'                 // www.soletheory.fitt
+'https://soletheory.fit',                     
+  'https://www.soletheory.fit',                 
+  'https://sole-theory-store.vercel.app',
+  'https://sole-theory-admin-ui.vercel.app'
 ];
 
 app.use(cors({
