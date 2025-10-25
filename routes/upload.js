@@ -1,5 +1,5 @@
 import express from 'express';
-import multer from 'multer';
+
 import path from 'path';
 import fs from 'fs';
 import auth from '../middleware/auth.js';
@@ -26,7 +26,7 @@ router.post('/', auth('admin'), upload.single('image'), (req, res) => {
 
 export default router;
 
-- import multer from 'multer';
-+ import multerNS from 'multer';
-+ const multer = multerNS.default || multerNS;
+
+ import multerNS from 'multer';
+const multer = multerNS.default || multerNS;
   
