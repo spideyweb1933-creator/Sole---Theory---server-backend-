@@ -6,15 +6,42 @@ import cors from 'cors';
 import { rateLimit } from 'express-rate-limit';
 import path from 'path';
 
-import User from './models/User.js';
+// safe bcrypt import for Node 22
 import bcryptNS from 'bcrypt';
 const bcrypt = bcryptNS.default || bcryptNS;
 
+// models & routes
+import User from './models/User.js';
 import authRoutes from './routes/auth.js';
 import productRoutes from './routes/products.js';
 import uploadRoutes from './routes/upload.js';
-mongoose.connect(process.env.MONGO_URI).then(() => console.log('Mongo connected'));
 
+const app = express();
+
+// middleware
+app.use(helmet());
+app.use(cors({ origin: true, credentials: true }));
+app.use(express.json({ limit: '5mb' }));
+app.use(rateLimit({ windowMs: 60 * 1000, limit: 120 }));
+
+// static uploads
+app.use('/uploads', express.static('uploads'));
+
+// routes
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/upload', uploadRoutes);
+
+// health
+app.get('/', (_req, res) => res.json({ ok: true }));
+
+// DB
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log('Mongo connected'))
+  .catch(err => console.error('Mongo error:', err));
+
+// auto-create admin on first boot
 mongoose.connection.once('open', async () => {
   try {
     const count = await User.countDocuments();
@@ -29,3 +56,6 @@ mongoose.connection.once('open', async () => {
     console.error('Auto-admin create failed:', e.message);
   }
 });
+
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log('Server running on', PORT));
