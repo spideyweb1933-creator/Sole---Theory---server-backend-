@@ -1,12 +1,13 @@
 import express from 'express';
-
+import multerNS from 'multer';
 import path from 'path';
 import fs from 'fs';
 import auth from '../middleware/auth.js';
 
+const multer = multerNS.default || multerNS;
 const router = express.Router();
 
-const uploadDir = path.join(process.cwd(), 'uploads');
+const uploadDir = 'uploads';
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
 const storage = multer.diskStorage({
@@ -25,8 +26,3 @@ router.post('/', auth('admin'), upload.single('image'), (req, res) => {
 });
 
 export default router;
-
-
- import multerNS from 'multer';
-const multer = multerNS.default || multerNS;
-  
