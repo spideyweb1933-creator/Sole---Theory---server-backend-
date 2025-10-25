@@ -59,3 +59,7 @@ app.get('/', (_req, res) => res.json({ ok: true }));
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log('Server running on', port));
+
+- import bcrypt from 'bcrypt';
++ import bcryptNS from 'bcrypt';
++ const bcrypt = bcryptNS.default || bcryptNS;
