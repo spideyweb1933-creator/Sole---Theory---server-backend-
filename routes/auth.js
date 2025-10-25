@@ -17,3 +17,10 @@ router.post('/login', async (req, res) => {
 
 export default router;
 
+
+- import bcrypt from 'bcrypt';
+- import jwt from 'jsonwebtoken';
++ import bcryptNS from 'bcrypt';
++ import jwtNS from 'jsonwebtoken';
++ const bcrypt = bcryptNS.default || bcryptNS;
++ const jwt = jwtNS.default || jwtNS;
