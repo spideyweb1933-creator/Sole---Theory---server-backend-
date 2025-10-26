@@ -1,3 +1,14 @@
+
+console.log('Booting Sole Theory server...');
+
+// show any hidden crash reason
+process.on('unhandledRejection', (err) => {
+  console.error('UNHANDLED REJECTION:', err && err.stack || err);
+});
+process.on('uncaughtException', (err) => {
+  console.error('UNCAUGHT EXCEPTION:', err && err.stack || err);
+  // do NOT process.exit here; keep process alive so we see logs
+});
 // server.js (ESM)
 import 'dotenv/config';
 import express from 'express';
