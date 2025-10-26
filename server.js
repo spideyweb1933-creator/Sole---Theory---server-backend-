@@ -32,3 +32,10 @@ app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ limit: "5mb" }));
 app.use(rateLimit({ windowMs: 60_000, limit: 120 }));
+import authRoutes from "./routes/auth.js";
+import productRoutes from "./routes/products.js";
+import uploadRoutes from "./routes/upload.js";
+
+app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/upload", uploadRoutes);
