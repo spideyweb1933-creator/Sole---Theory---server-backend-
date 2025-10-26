@@ -1,3 +1,8 @@
+const allowedOrigins = [
+  'https://soletheory.fit',
+  'https://www.soletheory.fit',
+  'https://sole-theory-admin-ui.vercel.app'
+];
 // server.js  (ESM)
 
 // env & core
