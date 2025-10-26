@@ -22,3 +22,11 @@ if (!MONGO) {
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log('SMOKE server running on', PORT));
+import helmet from "helmet";
+import cors from "cors";
+import { rateLimit } from "express-rate-limit";
+
+app.use(helmet({ crossOriginResourcePolicy: false }));
+app.use(cors({ origin: true, credentials: true }));
+app.use(express.json({ limit: "5mb" }));
+app.use(rateLimit({ windowMs: 60_000, limit: 120 }));
