@@ -1,3 +1,5 @@
+import User from "./models/User.js";
+
 // --- SMOKE TEST SERVER (keep it simple) ---
 import 'dotenv/config';
 import express from 'express';
